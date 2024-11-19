@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <style>
+  *{
+    padding:0;
+    margin:0;
+  }
+  h1{
+    margin: 20px 0px 0;
+    font-size:7rem;
+    text-align:center;
+  }
+  div h2{
+    font-size:6rem;
+    color:red;
+    width:100%;
+    margin:20px 0 0;
+    text-align:center;
+    border-radius:20px 20px ;
+  }
+  input {
+    text-align:center;
+    align-items:center;
+    font-size:4rem;
+    margin-top:3rem;
+  }
+  #lotto-result{
+    font-size:7rem;
+    margin-left:30% ;
+  }
+  #button{
+    font-size:5rem;
+    background-color:green;
+    text-align:center;
+    margin-left:30%;
+    margin-top:2rem;
+    border-radius:20px;
+  }
+  .spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid blue;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  #button:after{
+    color:black;
+    background-color:red;
+  }
+  </style>
+  <title>church project</title>
+  
+</head>
+<body>
+  <div>
+    <h1>
+      Church's Lotter
+    </h1>
+  </div>
+  <div>
+    <h2>
+      total number
+    </h2>
+    <input  id="lotto-number" type="numbers" placeholder="place number here">
+  </div>
+  <div>
+    <button id="button" > Generate</button>
+  </div>
+  <div id="loading-spinner" class="spinner" style="display: none;"></div>
+
+  <div id="lotto-result">
+    Result space
+    <div>
+      <script>
+      
+      document.getElementById("button").addEventListener("click", function() {
+      
+      const maxNumber = document.getElementById("lotto-number").value;
+      const resultElement = document.getElementById("lotto-result");
+      
+      
+      resultElement.textContent = "The winner is...";
+
+      
+      if (maxNumber && maxNumber > 0) {
+        
+        setTimeout(function() {
+          
+          const randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+          resultElement.textContent = randomNumber;  
+        }, 7000); // 10000 milliseconds = 10 seconds
+      } else {
+        resultElement.textContent = "Invalid input";
+      }
+        document.getElementById("loading-spinner").style.display = "block";  
+setTimeout(function() {
+  document.getElementById("loading-spinner").style.display = "none";  
+}, 7000);
+if (!maxNumber || maxNumber <= 0) {
+  resultElement.textContent = "Please enter a valid number greater than 0.";
+  return;
+}
+document.getElementById("button").disabled = true;
+setTimeout(function() {
+  document.getElementById("button").disabled = false;
+}, 10000);  
+
+    });
+  </script>
+</body>
+</html>
